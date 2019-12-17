@@ -12,6 +12,14 @@ yarn install
 yarn start
 ```
 
+## Roadmap
+
+* Create all the basic commands.
+* Refactor using commando framework.
+* Add basic server utils.
+* Add donation shop.
+* Move to TypeScript.
+
 ## License
 
 Code released under the [MIT](LICENSE) license.
