@@ -14,10 +14,11 @@ yarn start
 
 ## Roadmap
 
+* Move to Github Actions.
 * Create all the basic commands.
 * Refactor using commando framework.
 * Add basic server utils.
-* Add donation shop.
+* Add donation/gift shop.
 * Move to TypeScript.
 
 ## License
