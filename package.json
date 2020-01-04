@@ -12,7 +12,8 @@
     "precommit": "yarn lint"
   },
   "dependencies": {
-    "discord.js": "^11.5.1"
+    "discord.js": "^11.5.1",
+    "mysql": "^2.17.1"
   },
   "devDependencies": {
     "eslint": "^6.7.2",
