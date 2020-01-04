@@ -14,11 +14,13 @@ yarn start
 
 ## Roadmap
 
+* Update account creation logic.
 * Move to Github Actions.
 * Create all the basic commands.
 * Refactor using commando framework.
 * Add basic server utils.
 * Add donation/gift shop.
+* Update commands.
 * Move to TypeScript.
 
 ## License
