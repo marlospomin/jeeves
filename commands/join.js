@@ -26,7 +26,7 @@ module.exports = {
       return data.digest('hex').toUpperCase()
     }
 
-    connection.query('select exists(select id from account where reg_mail = ?)', [`${message.author.id}`], (error, results, fields) => {
+    connection.query('select exists(select id from account where reg_mail = ?)', [message.author.id], (error, results, fields) => {
       if (error) return message.reply('An error occured.')
 
       if (Object.values(results[0])[0] === 0) {
