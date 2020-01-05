@@ -8,19 +8,17 @@ module.exports = {
   name: 'join',
   description: 'Command used to create an account into the world server.',
   aliases: ['signup', 'register', 'login'],
-  usage: '<usernane> <password> <email>',
+  usage: '<usernane> <password>',
   cooldown: 30,
   execute (message, args) {
     if (!args.length) return message.reply('Missing arguments, type `!help join` for more info.')
 
     const username = args[0]
     const password = args[1]
-    const email = args[2]
 
-    if (!username || !password || !email) return
+    if (!username || !password) return
     if (username.length <= 3) return
     if (password.length <= 6) return
-    if (!/^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/.test(email)) return
 
     const toPassword = (username, password) => {
       const hash = crypto.createHash('sha1')
@@ -28,10 +26,18 @@ module.exports = {
       return data.digest('hex').toUpperCase()
     }
 
-    connection.query('insert into account (username, sha_pass_hash, email) values (?, ?, ?)', [username, toPassword(username, password), email], (error, results, fields) => {
-      if (error) {
-        return message.reply('Syntax error, please check your input arguments. Username must be at least 3 chars, password lenght should be greater than 5 and you must supply a valid email.')
-      } else { message.reply('Account created, you may login now.') }
+    connection.query('select exists(select id from account where reg_mail = ?)', [`${message.author.id}`], (error, results, fields) => {
+      if (error) return message.reply('An error occured.')
+
+      if (Object.values(results[0])[0] === 0) {
+        connection.query('insert into account (username, sha_pass_hash, reg_mail) values (?, ?, ?)', [username, toPassword(username, password), message.author.id], (error, results, fields) => {
+          if (error) {
+            return message.reply('Syntax error, please check your input arguments. Username must be at least 3 chars and password length should be greater than 5.')
+          } else { message.reply('Account created, you may login now.') }
+        })
+      } else {
+        message.reply('You already have an account!')
+      }
     })
   }
 }
