@@ -19,6 +19,7 @@ module.exports = {
       if (Object.values(results[0])[0] === 1) {
         if (args[0] === 'reset') {
           const password = args[1]
+
           if (!password || password.length <= 6) return
 
           const toPassword = (username, password) => {
@@ -29,8 +30,10 @@ module.exports = {
 
           connection.query('select username from account where reg_mail = ?', [message.author.id], (error, results, fields) => {
             if (error) return message.reply('An error occured.')
+
             const username = Object.values(results[0])[0]
-            connection.query('update account set sha_pass_hash = ? where reg_mail = ?', [toPassword(username, password), message.author.id], (error, results, fields) => {
+
+            connection.query('update account set sha_pass_hash = ?, s = ?, v = ? where reg_mail = ?', [toPassword(username, password), '', '', message.author.id], (error, results, fields) => {
               if (error) return message.reply('An error occured.')
               message.reply('New password set.')
             })
@@ -40,6 +43,7 @@ module.exports = {
         if (args[0] === 'delete') {
           connection.query('delete from account where reg_mail = ?', [message.author.id], (error, results, fields) => {
             if (error) return message.reply('An error occured.')
+
             message.reply('Account deleted successfully.')
           })
         }
