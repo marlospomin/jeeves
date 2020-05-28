@@ -2,8 +2,6 @@ const fs = require('fs')
 require('dotenv').config()
 const Discord = require('discord.js')
 
-if (!process.env.TOKEN) return console.log('Token not set, exiting.')
-
 const prefix = process.env.PREFIX || '!'
 const client = new Discord.Client()
 client.commands = new Discord.Collection()
