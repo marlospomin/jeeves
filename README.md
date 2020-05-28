@@ -34,6 +34,17 @@ heroku set stack:container
 git push heroku master
 ```
 
+Add the **required** environment variables using a `.env` file or within Heroku settings page:
+
+| Variable | Type | Example |
+| --- | --- | --- |
+| PREFIX | `string` | `!` |
+| TOKEN | `string` | `Ajk5NDU2NzEyNzg3EDQxMTE0.ZtAFYg.H5tKCb628tZ4X2ttUCZ2xhsbX1I` |
+| MYSQL_USER | `string` | `username` |
+| MYSQL_PASSWORD | `string` | `password` |
+| MYSQL_HOST | `string` | `127.0.0.1` |
+
+
 ## Roadmap
 
 * Add comments to the source code.
