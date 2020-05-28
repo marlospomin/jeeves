@@ -1,8 +1,8 @@
+require('dotenv').config()
 const mysql = require('mysql')
 const crypto = require('crypto')
-const { mysqlHost, mysqlUser, mysqlPassword } = require('../config.json')
 
-const connection = mysql.createConnection(`mysql://${mysqlUser}:${mysqlPassword}@${mysqlHost}/acore_auth`)
+const connection = mysql.createConnection(`mysql://${process.env.MYSQL_USER}:${process.env.MYSQL_PASSWORD}@${process.env.MYSQL_HOST}/acore_auth`)
 
 module.exports = {
   name: 'account',
